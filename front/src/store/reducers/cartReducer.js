@@ -1,7 +1,10 @@
 import {
     ADD_TO_CART,
-    DELETE_FROM_CART
+    DELETE_FROM_CART,
+    CART_PRODUCT_INCREMENT,
+    CART_PRODUCT_DECREMENT
 } from "../actions/cartActions"
+
 const INITIAL_STATE = {
     cart : []
 }
@@ -19,7 +22,11 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
              }
          }
 
-
+         case CART_PRODUCT_INCREMENT : {
+            return {
+                cart : [...action.payload]
+            }
+        }
 
 
         default:

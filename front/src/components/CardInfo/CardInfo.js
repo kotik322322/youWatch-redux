@@ -17,16 +17,18 @@ const CardInfo = () => {
     const dispatch = useDispatch()
     const { product, loading, error } = useSelector(state => state.productDetails)
 
-
     React.useEffect(() => {
         dispatch(listProductDetails(_id))
     }, [])
-
 
     const [tab, setTab] = React.useState(0)
 
     const goBack = () => {
         navigate("/store", { replace: true })
+    }
+
+    const handleAddToCart = () => {
+        dispatch(addToCart(product))
     }
 
 
@@ -88,7 +90,7 @@ const CardInfo = () => {
                                                 <p>{product.price}</p>
                                             </div>
                                             <Button
-                                                onClick={() => dispatch(addToCart(_id))}
+                                                onClick={handleAddToCart}
                                                 text={'Add to cart'} />
                                         </div>
 
@@ -121,3 +123,4 @@ const CardInfo = () => {
 }
 
 export default CardInfo
+

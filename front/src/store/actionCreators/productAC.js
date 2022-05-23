@@ -31,15 +31,7 @@ export const listProductDetails = (id) => async (dispatch) => {
         dispatch({
             type: GET_PRODUCT_DETAILS_SUCCESS,
             loading: false,
-            payload: {
-                description: data.description,
-                imageUrl: data.imageUrl,
-                name: data.name,
-                price: data.price,
-                productColors: data.productColors,
-                size: data.size,
-                warranty: data.warranty
-            }
+            payload: data
         })
     } catch (error) {
         dispatch({

@@ -8,9 +8,9 @@ import { DataProvider } from "./GloabalState"
 
 ReactDOM.render(
   <Provider store={store}>
-    <DataProvider>
+    {/* <DataProvider> */}
       <App />
-    </DataProvider>
+    {/* </DataProvider> */}
   </Provider>,
   document.getElementById('root')
 );

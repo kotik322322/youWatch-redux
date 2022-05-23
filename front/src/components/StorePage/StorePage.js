@@ -2,15 +2,18 @@ import React from 'react';
 import styles from '../StorePage/StorePage.module.scss';
 import Card from '../Card/Card'
 import axios from 'axios';
-
+import {useDispatch} from "react-redux"
+import {addToCart} from "../../store/actionCreators/cartAC"
 
 
 const StorePage = ({ filters }) => {
 
+    const dispatch = useDispatch()
+
 
     const [items, setItems] = React.useState([])
     const [url, setUrl] = React.useState('')
-    const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem('cart')) || [])
+
 
     const [filterList, setFilterList] = React.useState({
         Series: [],
@@ -69,18 +72,6 @@ const StorePage = ({ filters }) => {
         }
     }
 
-    const addToCart = (product) => {
-        const productExist = cart.find(item => item._id === product._id)
-        if (productExist) {
-            const result = cart.map(item => item._id === product._id ? { ...productExist, quantity: productExist.quantity + 1 } : item)
-            localStorage.setItem('cart', JSON.stringify(result))
-            setCart(JSON.parse(localStorage.getItem('cart')))
-        } else {
-            const result = [...cart, { ...product, quantity: 1 }]
-            localStorage.setItem('cart', JSON.stringify(result))
-            setCart(JSON.parse(localStorage.getItem('cart')))
-        }
-    }
 
 
     return (
@@ -120,14 +111,14 @@ const StorePage = ({ filters }) => {
                         {items.length === 0 && <p style={{ textAlign: "center", fontWeight: "500", fontSize: "25px" }}>No products found for the corresponding categories</p>}
 
                         {
-                            items.map((item, _id) => (
+                            items.map((item) => (
                                 <Card
                                     key={item._id}
                                     name={item.name}
                                     imageUrl={item.imageUrl[0]}
                                     price={item.price}
                                     path={item._id}
-                                    addToCart={() => addToCart(item)}
+                                    addToCart={() => dispatch(addToCart(item))}
                                     text={'Add to cart'}
                                 />
                             ))
