@@ -1,0 +1,30 @@
+@import '../node_modules/reset-css/sass/_reset.scss';
+html,
+body {
+
+  font-family: 'Inter', sans-serif;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+}
+
+.App {
+  display: flex;  
+  flex-direction: column;
+  /* align-items: start; */
+  /* align-items: center; */
+  /* min-height: 100vh; */
+}
+
+.main {
+  /* flex-grow: 1; */
+  max-width: 1200px;
+  margin: 0 auto;
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 20px ;
+  margin-top: 150px; */
+}
+
