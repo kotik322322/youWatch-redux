@@ -2,21 +2,22 @@ import React from 'react';
 import styles from '../StorePage/StorePage.module.scss';
 import Card from '../Card/Card'
 import axios from 'axios';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../../store/actionCreators/cartAC"
-import { addToFavorite } from "../../store/actionCreators/favoriteAC"
+import Loader from '../Loader/Loader';
+import { listProduct } from '../../store/actionCreators/productAC';
+
+
 
 
 
 const StorePage = ({ filters }) => {
 
     const dispatch = useDispatch()
+    const {products, message, loading, error} = useSelector(state => state.productList)
 
 
-    const [items, setItems] = React.useState([])
     const [url, setUrl] = React.useState('')
-
-
     const [filterList, setFilterList] = React.useState({
         Series: [],
         Size: [],
@@ -24,20 +25,15 @@ const StorePage = ({ filters }) => {
     })
 
     React.useEffect(() => {
-        const getWatches = async () => {
-            const { data } = await axios.get(`http://localhost:9000/watches-name${url}`)
-
-            setItems(data)
-
-        }
-
-        getWatches()
+        dispatch(listProduct(url))
     }, [url])
 
 
     React.useEffect(() => {
         transformURL()
     }, [filterList])
+
+
 
     const filtersKey = Object.keys(filters);
 
@@ -78,7 +74,6 @@ const StorePage = ({ filters }) => {
     }
 
 
-
     return (
         <div className={styles.store}>
             <h1 className={styles.storeTitle}> Choose your Apple Watch </h1>
@@ -111,12 +106,11 @@ const StorePage = ({ filters }) => {
                             })}
                         </div>
                     </div>
-
                     <div className={styles.storeRight}>
-                        {items.length === 0 && <p style={{ textAlign: "center", fontWeight: "500", fontSize: "25px" }}>No products found for the corresponding categories</p>}
-
-                        {
-                            items.map((item) => (
+                        <p>{message&&message}</p>
+                        { loading 
+                        ? <Loader/> 
+                        : products.map((item) => (
                                 <Card
                                     key={item._id}
                                     name={item.name}
@@ -124,7 +118,6 @@ const StorePage = ({ filters }) => {
                                     price={item.price}
                                     path={item._id}
                                     addToCart={() => dispatch(addToCart(item))}
-                                    handleFavorite={() => dispatch(addToFavorite(item))}
                                     text={'Add to cart'}
                                 />
                             ))

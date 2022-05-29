@@ -7,8 +7,7 @@ import { addToCart } from '../../store/actionCreators/cartAC'
 import Button from '../Button/Button'
 import Timer from '../Timer/Timer'
 import Loader from "../Loader/Loader"
-import {AiOutlineHeart} from "react-icons/ai"
-import {AiFillHeart} from "react-icons/ai"
+
 
 
 
@@ -52,14 +51,7 @@ const CardInfo = () => {
                                         className={styles.goBack}
                                         onClick={goBack}
                                     >Go Back</button>
-                                    <AiOutlineHeart 
-                                    style = {{marginLeft: "100px", fontSize:"35px"}}
-                                    onClick={() => console.log("Hello")}
-                                    />
-                                    <AiFillHeart 
-                                    style = {{marginLeft: "100px", fontSize:"35px"}}
-                                    onClick={() => console.log("Buy")}
-                                    />
+
 
                                     <div className={styles.slider}>
                                         <div className={styles.sliderWrapper}>

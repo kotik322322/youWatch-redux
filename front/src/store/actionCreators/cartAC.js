@@ -21,7 +21,7 @@ export const addToCart = (product) => (dispatch) => {
         cart.push(productToAdd)
 
     } else {
-        console.log("Такой товар уже есть в корзине");
+        console.log('Товар уже в корзине');
     }
 
     localStorage.setItem("cart", JSON.stringify(cart))
@@ -29,6 +29,7 @@ export const addToCart = (product) => (dispatch) => {
     dispatch({
         type: ADD_TO_CART,
         payload: cart
+        
     })
 }
 

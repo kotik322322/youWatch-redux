@@ -1,22 +1,37 @@
 import axios from "axios"
 import {
-    GET_PRODUCT_LIST,
+    GET_PRODUCT_LIST_REQUEST,
+    GET_PRODUCT_LIST_SUCCESS,
+    GET_PRODUCT_LIST_FAIL,
+
     GET_PRODUCT_DETAILS_REQUEST,
     GET_PRODUCT_DETAILS_SUCCESS,
     GET_PRODUCT_DETAILS_FAIL
 } from "../actions/productActions"
 
-export const listProduct = () => async (dispatch) => {
+export const listProduct = (url) => async (dispatch) => {
     try {
+        dispatch({
+            type: GET_PRODUCT_LIST_REQUEST
+        })
 
-        const { data } = await axios.get("http://localhost:9000/watches")
+        const { data } = await axios.get(`http://localhost:9000/watches-filter${url}`)
+        const message = data.length === 0 ? "No products" : ''
 
         dispatch({
-            type: GET_PRODUCT_LIST,
-            payload: data
+            type: GET_PRODUCT_LIST_SUCCESS,
+            payload: {
+                data,
+                message
+            }
         })
     } catch (error) {
-
+        console.log(error);
+        return {
+            type: GET_PRODUCT_LIST_FAIL,
+            payload: error
+            //проверить почему не выводится ошибка
+        }
     }
 }
 
@@ -30,7 +45,6 @@ export const listProductDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: GET_PRODUCT_DETAILS_SUCCESS,
-            loading: false,
             payload: data
         })
     } catch (error) {

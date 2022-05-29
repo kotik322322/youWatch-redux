@@ -1,7 +1,7 @@
 import watchesModel from '../../models/watchesModel.js'
 
 const filter = (app) => {
-    app.get('/watches-name/', async (req, res) => {
+    app.get('/watches-filter/', async (req, res) => {
         try {
             const query = req.query
             const result = await watchesModel.find(query)

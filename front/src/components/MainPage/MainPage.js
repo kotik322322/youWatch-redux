@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 ////Components
 import Main from '../Main/Main';
 import Cart from '../Cart/Cart';
-import Favorite from '../Favorite/Favorite';
 import ContactUs from '../ContactUs/ContactUs';
 import Blog from '../Blog/Blog';
 import StorePage from '../StorePage/StorePage';
@@ -20,8 +19,6 @@ const MainPage = ({slides, filters}) => {
             <Route path='/' element={<Main slides= {slides} />} />
 
             <Route path='/cart' element={<Cart />} />
-
-            <Route path='/favorite' element={<Favorite />} />
 
             <Route path='/contact_us' element={<ContactUs />} />
 

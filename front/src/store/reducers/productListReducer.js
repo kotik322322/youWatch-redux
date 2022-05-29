@@ -1,15 +1,35 @@
 import {
-    GET_PRODUCT_LIST,
+    GET_PRODUCT_LIST_REQUEST,
+    GET_PRODUCT_LIST_SUCCESS,
+    GET_PRODUCT_LIST_FAIL,
+
     GET_PRODUCT_DETAILS_REQUEST,
     GET_PRODUCT_DETAILS_SUCCESS,
     GET_PRODUCT_DETAILS_FAIL
 } from "../actions/productActions"
 
 
-export const productListReducer = (state = { products: [] }, action) => {
+export const productListReducer = (state = { products: [], loading : false}, action) => {
     switch (action.type) {
-        case GET_PRODUCT_LIST:
-            return { products: action.payload }
+        case GET_PRODUCT_LIST_REQUEST: {
+            return {
+                loading : true
+            }
+        }
+        case GET_PRODUCT_LIST_SUCCESS: {
+            return {
+                products: action.payload.data,
+                message : action.payload.message,
+                loading : false
+            }
+        }
+        case GET_PRODUCT_LIST_FAIL : {
+            return {
+                loading: false,
+                error: action.payload
+            }
+        }
+
 
 
         default:
@@ -17,7 +37,7 @@ export const productListReducer = (state = { products: [] }, action) => {
     }
 }
 
-export const productDetailsReducer = (state = { product: {}, loading : true}, action) => {
+export const productDetailsReducer = (state = { product: {}, loading: true }, action) => {
     switch (action.type) {
         case GET_PRODUCT_DETAILS_REQUEST:
             return {
@@ -27,12 +47,12 @@ export const productDetailsReducer = (state = { product: {}, loading : true}, ac
         case GET_PRODUCT_DETAILS_SUCCESS:
             return {
                 product: action.payload,
-                loading : false
+                loading: false
             }
-        case GET_PRODUCT_DETAILS_FAIL : 
+        case GET_PRODUCT_DETAILS_FAIL:
             return {
-                loading : false,
-                error : action.payload
+                loading: false,
+                error: action.payload
             }
 
 

@@ -41,9 +41,6 @@ const Header = ({ icons }) => {
         </div>
 
         <ul className={styles.headerPanel}>
-          <Link className={styles.headerIcons} to='/favorite'>
-            <AiOutlineHeart style={{ fontSize: "30px", color: "#222222" }} />
-          </Link>
 
           <Link className={styles.headerIcons} to='/login'>
             <BsPerson style={{ fontSize: "33px", color: "#222222" }} />
