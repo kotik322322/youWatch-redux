@@ -15,6 +15,10 @@
     width: 100%;
     row-gap: 30px;
   }
+  &Favorite {
+    display: block;
+    margin: 5px 5px 5px auto;
+  }
   &Elements {
     width: 100%;
     display: grid;

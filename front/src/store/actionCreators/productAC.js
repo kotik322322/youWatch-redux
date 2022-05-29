@@ -10,7 +10,7 @@ export const listProduct = () => async (dispatch) => {
     try {
 
         const { data } = await axios.get("http://localhost:9000/watches")
-        console.log(data);
+
         dispatch({
             type: GET_PRODUCT_LIST,
             payload: data

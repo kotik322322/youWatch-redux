@@ -3,7 +3,7 @@ import styles from "./CartItem.module.scss"
 import imgTrash from "../../assets/cart/icons_trash.svg";
 
 
-const CartItem = ({imageUrl, name, color, size, price, onClick, addProduct, removeProduct, quantity}) => {
+const CartItem = ({imageUrl, name, color, size, price, deleteFromCart, productIncrement, productDecrement, quantity}) => {
     return (
         <div className={styles.cartInfo}>
 
@@ -19,16 +19,16 @@ const CartItem = ({imageUrl, name, color, size, price, onClick, addProduct, remo
             className={styles.cartInfoTrash} 
             src={imgTrash} 
             alt="img_trash" 
-            onClick={onClick}
+            onClick={deleteFromCart}
             />
             <div className={styles.cartInfoQuantity}>
                 <button 
                 className={styles.cartInfoBtn}
-                onClick={addProduct}
+                onClick={productIncrement}
                 >+</button>
                 <button 
                 className={styles.cartInfoBtn}
-                onClick={removeProduct}
+                onClick={productDecrement}
                 >-</button>
             </div>
 

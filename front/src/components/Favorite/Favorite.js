@@ -1,143 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../Favorite/Favorite.module.scss';
 import Button from '../Button/Button';
-
 import favoriteImage from "../../assets/watch.png";
-import favorite from '../../assets/favorite/favoriteSolid.svg';
-import axios from 'axios'
+import favoriteIcon from '../../assets/favorite/favoriteSolid.svg';
+import { useDispatch, useSelector } from "react-redux"
+
+
 
 
 const Favorite = () => {
+  const dispatch = useDispatch()
 
-  const [product, setProduct] = useState([])
+  const { favorite } = useSelector(state => state.favoriteList)
+  console.log(favorite);
 
-  useEffect(() => {
-    axios.get('http://localhost:9000/watch_7').then(res => console.log(res))
-  }, [])
+  // React.useEffect(() => {
+  //   dispatch()
+  // }, [dispatch])
 
-    return (
+
+
+
+  return (
 
 
     <div className={styles.favorite}>
-       
-        <h2 className={styles.favoriteTitle}> Favorite </h2>
-              {/* <h4 className={styles.cartStatus}> Your favorite is empty </h4> */}
-            <div className={styles.favoriteWrapper}>
-              <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
 
-               </div>
+      <h2 className={styles.favoriteTitle}> Favorite </h2>
+      {/* <h4 className={styles.cartStatus}> Your favorite is empty </h4> */}
 
-               <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
-
-               </div>
-
-               <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
-
-               </div>
-
-               <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
-
-               </div>
-
-               <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
-
-               </div>
-
-               <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
-
-               </div>
-
-               <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
-
-               </div>
-
-               <div className={styles.favoriteInner}>
-                <img className={styles.favoriteImage} src={favoriteImage} alt="favorite_image" />
-                  <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
-                    <p className={styles.favoritePrice}> $ 360 </p>
-                    <div className={styles.favoriteFooter}>
-                      <img className={styles.favoriteIcon} src={favorite} alt="favorite_icon_heart" />
-                   <Button
-                    text={'Add to cart'}        
-                  />
-                  </div>
-
-               </div>
-
-
-
-
-
+      {
+        favorite.map(item => (
+          <div className={styles.favoriteWrapper}>
+            <div className={styles.favoriteInner}>
+              <img className={styles.favoriteImage} src={item.imageUrl[0]} alt="favorite_image" />
+              <p className={styles.favoriteName}> Apple Watch Series SE 40mm Gold with Starlight Sport Band (MKQ03) </p>
+              <p className={styles.favoritePrice}> $ {item.price}</p>
+              <div className={styles.favoriteFooter}>
+                <img className={styles.favoriteIcon} src={favoriteIcon} alt="favorite_icon_heart" />
+                <Button
+                  text={'Add to cart'}
+                />
+              </div>
 
             </div>
-    </div>   
+          </div>
+        ))
+      }
 
 
 
- )
+
+
+    </div>
+
+
+
+  )
 }
 
 

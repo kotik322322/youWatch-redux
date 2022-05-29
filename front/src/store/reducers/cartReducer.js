@@ -22,9 +22,21 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
              }
          }
 
+         case DELETE_FROM_CART : {
+            return {
+                cart : [...action.payload]
+            }
+        }
+
          case CART_PRODUCT_INCREMENT : {
             return {
                 cart : [...action.payload]
+            }
+        }
+
+        case CART_PRODUCT_DECREMENT : {
+            return {
+                cart: [...action.payload]
             }
         }
 

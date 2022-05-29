@@ -2,8 +2,10 @@ import React from 'react';
 import styles from '../StorePage/StorePage.module.scss';
 import Card from '../Card/Card'
 import axios from 'axios';
-import {useDispatch} from "react-redux"
-import {addToCart} from "../../store/actionCreators/cartAC"
+import { useDispatch } from "react-redux"
+import { addToCart } from "../../store/actionCreators/cartAC"
+import { addToFavorite } from "../../store/actionCreators/favoriteAC"
+
 
 
 const StorePage = ({ filters }) => {
@@ -24,8 +26,11 @@ const StorePage = ({ filters }) => {
     React.useEffect(() => {
         const getWatches = async () => {
             const { data } = await axios.get(`http://localhost:9000/watches-name${url}`)
+
             setItems(data)
+
         }
+
         getWatches()
     }, [url])
 
@@ -119,6 +124,7 @@ const StorePage = ({ filters }) => {
                                     price={item.price}
                                     path={item._id}
                                     addToCart={() => dispatch(addToCart(item))}
+                                    handleFavorite={() => dispatch(addToFavorite(item))}
                                     text={'Add to cart'}
                                 />
                             ))

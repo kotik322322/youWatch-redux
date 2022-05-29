@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styles from '../Cart/Cart.module.scss';
 import Button from '../Button/Button';
 import CartItem from '../CartItem/CartItem';
-import {useDispatch ,useSelector} from "react-redux"
-import {cartProductIncrement} from "../../store/actionCreators/cartAC"
+import { useDispatch, useSelector } from "react-redux"
+import { cartProductIncrement, cartProductDecrement, deleteFromCart } from "../../store/actionCreators/cartAC"
 
 
 
@@ -11,7 +11,7 @@ const Cart = () => {
 
     const dispatch = useDispatch()
 
-    const {cart} = useSelector(state => state.cart)
+    const { cart } = useSelector(state => state.cart)
 
 
     return (
@@ -38,8 +38,15 @@ const Cart = () => {
                                     size={item.filter.Size}
                                     price={item.price}
                                     quantity={item.quantity}
-                                    onClick={() => console.log("hello")}
-                                    addProduct = {() => dispatch(cartProductIncrement(item))}
+                                    deleteFromCart={() => dispatch(deleteFromCart(item))}
+                                    productIncrement={() => dispatch(cartProductIncrement(item))}
+                                    productDecrement={() => {
+                                        if (item.quantity > 1) {
+                                            dispatch(cartProductDecrement(item))
+                                        } else {
+                                            dispatch(deleteFromCart(item))
+                                        }
+                                    }}
 
                                 />)
                             : <h4 className={styles.cartStatus}> Your cart is empty </h4>
